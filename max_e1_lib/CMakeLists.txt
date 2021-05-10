@@ -9,6 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_library(max_e1 SHARED
     src/max_e1_core.cpp
+    src/max_e1_sensors.cpp
+    src/max_e1.cpp
 )
 
 target_include_directories(max_e1

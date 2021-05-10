@@ -2,6 +2,7 @@
 #include "max_e1_core.hpp"
 
 constexpr double PROTOCOL_VERSION = 2.0;
+constexpr uint8_t CM550_ID = 200;
 
 MaxE1Core::MaxE1Core(const std::string device_name, const int baudrate)
     : baudrate_(baudrate)
@@ -24,14 +25,41 @@ bool MaxE1Core::open_port()
         return false;
     }
 
-    std::cout << "Port opened" << std::endl;
-
     return true;
 }
 
 void MaxE1Core::close_port()
 {
     port_handler_->closePort();
+}
 
-    std::cout << "Port closed" << std::endl;
+
+uint8_t MaxE1Core::read_1byte(const uint16_t address, uint8_t *received_data)
+{
+    uint8_t dxl_error = 0;
+    int dxl_result = packet_handler_->read1ByteTxRx(port_handler_.get(), CM550_ID, address, received_data, &dxl_error);
+
+    if(!parse_dxl_error(dxl_result, dxl_error)){
+        return false;
+    }
+    return true;
+}
+
+bool MaxE1Core::parse_dxl_error(const int dxl_comm_result, const uint8_t dxl_packet_error)
+{
+    bool retval = true;
+
+    if (dxl_comm_result != COMM_SUCCESS)
+    {
+        std::cerr << std::string(packet_handler_->getTxRxResult(dxl_comm_result)) << std::endl;
+        retval = false;
+    }
+
+    if (dxl_packet_error != 0)
+    {
+        std::cerr << std::string(packet_handler_->getRxPacketError(dxl_packet_error)) << std::endl;
+        retval = false;
+    }
+
+    return retval;
 }
