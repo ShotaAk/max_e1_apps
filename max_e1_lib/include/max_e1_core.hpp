@@ -12,6 +12,7 @@ public:
     bool open_port();
     void close_port();
     bool read_1byte(const uint16_t address, uint8_t *received_data);
+    bool read_2bytes(const uint16_t address, uint16_t *received_data);
 
 private:
     bool parse_dxl_error(const int dxl_comm_result, const uint8_t dxl_packet_error);

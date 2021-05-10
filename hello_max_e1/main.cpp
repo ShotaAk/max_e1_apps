@@ -10,11 +10,15 @@ int main() {
     if(max_e1.connect()){
         int i = 0;
         while(i < 100){
-            i++;
+            // i++;
 
             max_e1.sensors->update();
-            std::cout<<"voltage:"<<max_e1.sensors->get_voltage()<< std::endl;
-            std::cout<<"temperature:"<<max_e1.sensors->get_temperature() << std::endl;
+            std::cout<<"sound_detecting_count:"<<max_e1.sensors->sound_detecting_count()<<std::endl;
+            std::cout<<"voltage:"<<max_e1.sensors->voltage()<< std::endl;
+            std::cout<<"temperature:"<<max_e1.sensors->temperature() << std::endl;
+            std::cout<<"acc_x:"<<max_e1.sensors->acc_x() << std::endl;
+            std::cout<<"acc_y:"<<max_e1.sensors->acc_y() << std::endl;
+            std::cout<<"acc_z:"<<max_e1.sensors->acc_z() << std::endl;
 
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }

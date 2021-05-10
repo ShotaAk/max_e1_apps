@@ -45,6 +45,17 @@ bool MaxE1Core::read_1byte(const uint16_t address, uint8_t *received_data)
     return true;
 }
 
+bool MaxE1Core::read_2bytes(const uint16_t address, uint16_t *received_data)
+{
+    uint8_t dxl_error = 0;
+    int dxl_result = packet_handler_->read2ByteTxRx(port_handler_.get(), CM550_ID, address, received_data, &dxl_error);
+
+    if(!parse_dxl_error(dxl_result, dxl_error)){
+        return false;
+    }
+    return true;
+}
+
 bool MaxE1Core::parse_dxl_error(const int dxl_comm_result, const uint8_t dxl_packet_error)
 {
     bool retval = true;
