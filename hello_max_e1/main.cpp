@@ -13,7 +13,8 @@ int main() {
             i++;
 
             max_e1.sensors->update();
-            std::cout<<max_e1.sensors->get_temperature() << std::endl;
+            std::cout<<"voltage:"<<max_e1.sensors->get_voltage()<< std::endl;
+            std::cout<<"temperature:"<<max_e1.sensors->get_temperature() << std::endl;
 
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }

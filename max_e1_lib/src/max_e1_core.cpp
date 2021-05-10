@@ -34,7 +34,7 @@ void MaxE1Core::close_port()
 }
 
 
-uint8_t MaxE1Core::read_1byte(const uint16_t address, uint8_t *received_data)
+bool MaxE1Core::read_1byte(const uint16_t address, uint8_t *received_data)
 {
     uint8_t dxl_error = 0;
     int dxl_result = packet_handler_->read1ByteTxRx(port_handler_.get(), CM550_ID, address, received_data, &dxl_error);
