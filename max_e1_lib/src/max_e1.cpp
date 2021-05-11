@@ -1,5 +1,8 @@
 
+#include <iostream>
 #include "max_e1.hpp"
+
+constexpr uint16_t ADDR_MODE_NUMBER = 21;
 
 MaxE1::MaxE1(const std::string device_name, const int baudrate)
 {
@@ -21,4 +24,12 @@ bool MaxE1::connect()
 void MaxE1::disconnect()
 {
     core_->close_port();
+}
+
+bool MaxE1::init()
+{
+    std::cout<<"MaxE1 init() is called."<<std::endl;
+
+    sensors->init();
+    return true;
 }

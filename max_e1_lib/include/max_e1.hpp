@@ -11,6 +11,7 @@ public:
     ~MaxE1();
     bool connect();
     void disconnect();
+    bool init();
     std::shared_ptr<MaxE1Sensors> sensors;
 
 private:
