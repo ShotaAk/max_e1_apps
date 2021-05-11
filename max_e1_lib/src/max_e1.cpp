@@ -18,6 +18,8 @@ bool MaxE1::connect()
 {
     bool result = core_->open_port();
     sensors = std::make_shared<MaxE1Sensors>(core_);
+    actuators = std::make_shared<MaxE1Actuators>(core_);
+    
     return result;
 }
 
@@ -30,6 +32,12 @@ bool MaxE1::init()
 {
     std::cout<<"MaxE1 init() is called."<<std::endl;
 
+    core_->write_1byte(ADDR_MODE_NUMBER, 0);  // モードをIDLEに変更
+    uint8_t data=100;
+    core_->read_1byte(ADDR_MODE_NUMBER,&data);
+    std::cout<<"Mode:"<<std::to_string(data)<<std::endl;
+
     sensors->init();
+    actuators->init();
     return true;
 }

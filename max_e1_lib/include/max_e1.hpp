@@ -3,6 +3,7 @@
 
 #include "max_e1_core.hpp"
 #include "max_e1_sensors.hpp"
+#include "max_e1_actuators.hpp"
 
 class MaxE1
 {
@@ -13,6 +14,7 @@ public:
     void disconnect();
     bool init();
     std::shared_ptr<MaxE1Sensors> sensors;
+    std::shared_ptr<MaxE1Actuators> actuators;
 
 private:
     std::shared_ptr<MaxE1Core> core_;
