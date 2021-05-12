@@ -9,6 +9,9 @@ public:
     MaxE1Actuators(const std::shared_ptr<MaxE1Core> & core);
     ~MaxE1Actuators();
     bool init();
+    bool buzzer_melody(const int index=0);
+    bool buzzer_scale(const int index=0, const double time_seconds=0);
+    bool led(const bool red, const bool green, const bool blue);
 
 private:
     std::shared_ptr<MaxE1Core> core_;

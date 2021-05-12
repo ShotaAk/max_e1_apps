@@ -1,6 +1,7 @@
 #include <iostream>
 #include "max_e1_core.hpp"
 
+// Dynamixel SDK e-manual:https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/overview/
 constexpr double PROTOCOL_VERSION = 2.0;
 constexpr uint8_t CM550_ID = 200;
 

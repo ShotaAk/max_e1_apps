@@ -2,6 +2,7 @@
 #include <iostream>
 #include "max_e1_sensors.hpp"
 
+// CM-550 e-manual:https://emanual.robotis.com/docs/en/parts/controller/cm-550/
 constexpr uint16_t ADDR_SOUND_DETECTING_COUNT = 87;
 constexpr uint16_t ADDR_VOLTAGE = 89;
 constexpr uint16_t ADDR_TEMPERATURE = 90;
@@ -43,6 +44,7 @@ bool MaxE1Sensors::update()
     if(core_->read_1byte(ADDR_TEMPERATURE, &data8))
         temperature_ = data8;
 
+    // TODO:Use sync read
     if(core_->read_2bytes(ADDR_ROLL, &data16))
         orientation_r_ = to_real_orientation(data16);
     if(core_->read_2bytes(ADDR_PITCH, &data16))

@@ -2,6 +2,7 @@
 #include <iostream>
 #include "max_e1.hpp"
 
+// CM-550 e-manual:https://emanual.robotis.com/docs/en/parts/controller/cm-550/
 constexpr uint16_t ADDR_MODE_NUMBER = 21;
 
 MaxE1::MaxE1(const std::string device_name, const int baudrate)

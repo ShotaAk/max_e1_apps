@@ -12,8 +12,8 @@ int main() {
         max_e1.init();
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        while(i < 100){
-            // i++;
+        while(i < 10){
+            i++;
 
             auto begin = std::chrono::high_resolution_clock::now();
             max_e1.sensors->update();
@@ -36,8 +36,31 @@ int main() {
 
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
-        
 
+        // for(auto i=0; i <= 30; i++){
+        //     max_e1.actuators->buzzer_melody(i);
+        //     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+        // }
+
+        // max_e1.actuators->buzzer_scale(0, 3.0);
+        // max_e1.actuators->buzzer_scale(1, 2.0);
+        // max_e1.actuators->buzzer_scale(2, 1.0);
+
+        max_e1.actuators->led(true, false, false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        max_e1.actuators->led(false, true, false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        max_e1.actuators->led(false, false, true);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        max_e1.actuators->led(true, true, false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        max_e1.actuators->led(false, true, true);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        max_e1.actuators->led(true, false, true);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        max_e1.actuators->led(true, true, true);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        max_e1.actuators->led(false, false, false);
     }
     max_e1.disconnect();
 }
