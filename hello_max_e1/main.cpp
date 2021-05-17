@@ -46,21 +46,35 @@ int main() {
         // max_e1.actuators->buzzer_scale(1, 2.0);
         // max_e1.actuators->buzzer_scale(2, 1.0);
 
-        max_e1.actuators->led(true, false, false);
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        max_e1.actuators->led(false, true, false);
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        max_e1.actuators->led(false, false, true);
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        max_e1.actuators->led(true, true, false);
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        max_e1.actuators->led(false, true, true);
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        max_e1.actuators->led(true, false, true);
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        max_e1.actuators->led(true, true, true);
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        max_e1.actuators->led(false, false, false);
+        // max_e1.actuators->led(true, false, false);
+        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // max_e1.actuators->led(false, true, false);
+        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // max_e1.actuators->led(false, false, true);
+        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // max_e1.actuators->led(true, true, false);
+        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // max_e1.actuators->led(false, true, true);
+        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // max_e1.actuators->led(true, false, true);
+        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // max_e1.actuators->led(true, true, true);
+        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // max_e1.actuators->led(false, false, false);
+
+        max_e1.motions->play(7);
+        while(max_e1.motions->playing()){
+            std::cout<<"playing"<<std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));  // waitを入れないと通信エラーが発生する
+        max_e1.motions->play(1);
+        while(max_e1.motions->playing()){
+            std::cout<<"playing"<<std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+
     }
     max_e1.disconnect();
 }

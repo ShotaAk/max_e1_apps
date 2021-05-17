@@ -17,7 +17,8 @@ public:
     bool write_2bytes(const uint16_t address, const uint16_t write_data);
 
 private:
-    bool parse_dxl_error(const int dxl_comm_result, const uint8_t dxl_packet_error);
+    bool parse_dxl_error(const std::string & func_name, const uint8_t id,
+        const uint16_t address, const int dxl_comm_result, const uint8_t dxl_packet_error);
 
     std::shared_ptr<dynamixel::PortHandler> port_handler_;
     std::shared_ptr<dynamixel::PacketHandler> packet_handler_;

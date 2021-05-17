@@ -11,6 +11,7 @@ add_library(max_e1 SHARED
     src/max_e1_core.cpp
     src/max_e1_sensors.cpp
     src/max_e1_actuators.cpp
+    src/max_e1_motions.cpp
     src/max_e1.cpp
 )
 
