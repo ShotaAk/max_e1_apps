@@ -62,10 +62,11 @@ int main() {
         // std::this_thread::sleep_for(std::chrono::milliseconds(500));
         // max_e1.actuators->led(false, false, false);
 
-        max_e1.motions->play(1, true);
-        max_e1.motions->play(18, true);
-        max_e1.motions->play(20, true);
-        max_e1.motions->play(22, true);
+        max_e1.motions->play(18);
+        max_e1.motions->play(22);
+
+        max_e1.motions->play(23);
+        max_e1.motions->play(27);
     }
     max_e1.disconnect();
 }

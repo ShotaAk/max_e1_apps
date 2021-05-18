@@ -9,7 +9,7 @@ public:
     MaxE1Motions(const std::shared_ptr<MaxE1Core> & core);
     ~MaxE1Motions();
     bool init();
-    bool play(const int index=0, const bool wait=false, const int timeout_ms=3000);
+    bool play(const int index=0, const int timeout_ms=3000);
     bool stop(const std::string option="");
     bool playing();
 

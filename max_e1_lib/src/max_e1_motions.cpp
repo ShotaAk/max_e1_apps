@@ -30,7 +30,7 @@ bool MaxE1Motions::init()
     return true;
 }
 
-bool MaxE1Motions::play(const int index, const bool wait, const int timeout_ms)
+bool MaxE1Motions::play(const int index, const int timeout_ms)
 {
     const int MAX_INDEX = 65532;
     const int MIN_INDEX = 1;
@@ -40,27 +40,21 @@ bool MaxE1Motions::play(const int index, const bool wait, const int timeout_ms)
         return false;
     }
 
-    bool result = core_->write_2bytes(ADDR_MOTION_INDEX_NUMBER, index); 
-    if(wait){
-        // 動作が完了するまで待機
-        auto begin = std::chrono::high_resolution_clock::now();
-        int elapsed_time = 0;
+    // 前回のモーションが完了するまで待機
+    auto begin = std::chrono::high_resolution_clock::now();
+    int elapsed_time = 0;
+    while(playing()){
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-        while(playing()){
-            std::this_thread::sleep_for(std::chrono::milliseconds(1));
-
-            elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(
-                std::chrono::high_resolution_clock::now() - begin).count();
-            if(elapsed_time > timeout_ms){
-                std::cout << "Timeout of motion execution. Index:";
-                std::cout << std::to_string(index) << std::endl;
-                result = false;
-                break;
-            }
+        elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::high_resolution_clock::now() - begin).count();
+        if(elapsed_time > timeout_ms){
+            std::cout << "Timeout of prev motion execution. ";
+            std::cout << "Motion index:" << std::to_string(index) << " is canceled." << std::endl;
+            return false;
         }
     }
-
-    return result;
+    return core_->write_2bytes(ADDR_MOTION_INDEX_NUMBER, index); 
 }
 
 bool MaxE1Motions::stop(const std::string option)
