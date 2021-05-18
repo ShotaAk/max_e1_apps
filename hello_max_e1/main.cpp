@@ -12,7 +12,7 @@ int main() {
         max_e1.init();
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        while(i < 1000){
+        while(i < 10){
             i++;
 
             auto begin = std::chrono::high_resolution_clock::now();
@@ -35,6 +35,21 @@ int main() {
             std::cout<<"acc_z:"<<max_e1.sensors->acc_z() << std::endl;
 
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+
+        i = 0;
+        while(i < 1000){
+            max_e1.sensors->update();
+            std::cout<<"orientation_p:"<<max_e1.sensors->orientation_p() << std::endl;
+            if(max_e1.sensors->orientation_p() <= -1){
+                max_e1.motions->play(23);
+                max_e1.motions->play(27);
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            }else if(max_e1.sensors->orientation_p() >= 1){
+                max_e1.motions->play(18);
+                max_e1.motions->play(22);
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            }
         }
 
         // for(auto i=0; i <= 30; i++){
