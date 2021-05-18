@@ -29,6 +29,7 @@ MaxE1Sensors::~MaxE1Sensors()
 bool MaxE1Sensors::init()
 {
     std::cout<<"Sensors init() is called."<<std::endl;
+    reset_orientation_offsets();
     return true;
 }
 
@@ -46,11 +47,11 @@ bool MaxE1Sensors::update()
 
     // TODO:Use sync read
     if(core_->read_2bytes(ADDR_ROLL, &data16))
-        orientation_r_ = to_real_orientation(data16);
+        orientation_r_ = to_real_orientation(data16) - offset_orientation_r_;
     if(core_->read_2bytes(ADDR_PITCH, &data16))
-        orientation_p_ = to_real_orientation(data16);
+        orientation_p_ = to_real_orientation(data16) - offset_orientation_p_;
     if(core_->read_2bytes(ADDR_YAW, &data16))
-        orientation_y_ = to_real_orientation(data16);
+        orientation_y_ = to_real_orientation(data16) - offset_orientation_y_;
 
     if(core_->read_2bytes(ADDR_GYRO_X, &data16))
         gyro_x_ = to_real_gyro(data16);
@@ -67,6 +68,18 @@ bool MaxE1Sensors::update()
         acc_z_ = to_real_acc(data16);
 
     return true;
+}
+
+void MaxE1Sensors::reset_orientation_offsets()
+{
+    uint16_t data16;
+    // TODO: センサの平均値をとる
+    if(core_->read_2bytes(ADDR_ROLL, &data16))
+        offset_orientation_r_ = to_real_orientation(data16);
+    if(core_->read_2bytes(ADDR_PITCH, &data16))
+        offset_orientation_p_ = to_real_orientation(data16);
+    if(core_->read_2bytes(ADDR_YAW, &data16))
+        offset_orientation_y_ = to_real_orientation(data16);
 }
 
 double MaxE1Sensors::to_real_voltage(const uint8_t raw_voltage)

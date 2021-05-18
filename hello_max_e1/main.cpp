@@ -12,7 +12,7 @@ int main() {
         max_e1.init();
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        while(i < 10){
+        while(i < 1000){
             i++;
 
             auto begin = std::chrono::high_resolution_clock::now();
@@ -62,11 +62,11 @@ int main() {
         // std::this_thread::sleep_for(std::chrono::milliseconds(500));
         // max_e1.actuators->led(false, false, false);
 
-        max_e1.motions->play(18);
-        max_e1.motions->play(22);
+        // max_e1.motions->play(18);
+        // max_e1.motions->play(22);
 
-        max_e1.motions->play(23);
-        max_e1.motions->play(27);
+        // max_e1.motions->play(23);
+        // max_e1.motions->play(27);
     }
     max_e1.disconnect();
 }

@@ -26,6 +26,7 @@ public:
     double acc_x(){ return acc_x_; };
     double acc_y(){ return acc_y_; };
     double acc_z(){ return acc_z_; };
+    void reset_orientation_offsets();
 
 private:
     double to_real_voltage(const uint8_t raw_voltage);
@@ -46,6 +47,10 @@ private:
     double acc_x_;
     double acc_y_;
     double acc_z_;
+
+    double offset_orientation_r_;
+    double offset_orientation_p_;
+    double offset_orientation_y_;
 };
 
 #endif
