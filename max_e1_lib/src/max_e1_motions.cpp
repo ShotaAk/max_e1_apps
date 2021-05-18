@@ -1,6 +1,9 @@
 
-#include <iostream>
 #include <algorithm>
+#include <chrono>
+#include <iostream>
+#include <thread>
+
 #include "max_e1_motions.hpp"
 
 // CM-550 e-manual:https://emanual.robotis.com/docs/en/parts/controller/cm-550/
@@ -27,7 +30,7 @@ bool MaxE1Motions::init()
     return true;
 }
 
-bool MaxE1Motions::play(const int index)
+bool MaxE1Motions::play(const int index, const bool wait, const int timeout_ms)
 {
     const int MAX_INDEX = 65532;
     const int MIN_INDEX = 1;
@@ -37,7 +40,27 @@ bool MaxE1Motions::play(const int index)
         return false;
     }
 
-    return core_->write_2bytes(ADDR_MOTION_INDEX_NUMBER, index); 
+    bool result = core_->write_2bytes(ADDR_MOTION_INDEX_NUMBER, index); 
+    if(wait){
+        // 動作が完了するまで待機
+        auto begin = std::chrono::high_resolution_clock::now();
+        int elapsed_time = 0;
+
+        while(playing()){
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+            elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::chrono::high_resolution_clock::now() - begin).count();
+            if(elapsed_time > timeout_ms){
+                std::cout << "Timeout of motion execution. Index:";
+                std::cout << std::to_string(index) << std::endl;
+                result = false;
+                break;
+            }
+        }
+    }
+
+    return result;
 }
 
 bool MaxE1Motions::stop(const std::string option)

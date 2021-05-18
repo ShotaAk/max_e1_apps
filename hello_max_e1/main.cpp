@@ -62,19 +62,10 @@ int main() {
         // std::this_thread::sleep_for(std::chrono::milliseconds(500));
         // max_e1.actuators->led(false, false, false);
 
-        max_e1.motions->play(7);
-        while(max_e1.motions->playing()){
-            std::cout<<"playing"<<std::endl;
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        }
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));  // waitを入れないと通信エラーが発生する
-        max_e1.motions->play(1);
-        while(max_e1.motions->playing()){
-            std::cout<<"playing"<<std::endl;
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        }
-
+        max_e1.motions->play(1, true);
+        max_e1.motions->play(18, true);
+        max_e1.motions->play(20, true);
+        max_e1.motions->play(22, true);
     }
     max_e1.disconnect();
 }

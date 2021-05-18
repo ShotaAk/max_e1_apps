@@ -34,7 +34,7 @@ bool MaxE1::init()
 {
     std::cout<<"MaxE1 init() is called."<<std::endl;
 
-    core_->write_1byte(ADDR_MODE_NUMBER, 0);  // モードをIDLEに変更
+    core_->write_1byte(ADDR_MODE_NUMBER, 2);  // モードをIDLEに変更
     uint8_t data=100;
     core_->read_1byte(ADDR_MODE_NUMBER,&data);
     std::cout<<"Mode:"<<std::to_string(data)<<std::endl;
