@@ -1,4 +1,6 @@
-# MAX-E1 Applications
+# MAX-E1 CPP Applications
+
+![MAX-E1](./resources/MAX-E1.JPG)
 
 ## Requirements
 
@@ -39,6 +41,10 @@ $ ./uninstall.bash
 ## サンプルの実行
 
 max_e1_examplesの[README](./max_e1_examples/README.md)を参照。
+
+## LICENSE
+
+[Apache License 2.0](./LICENSE)
 
 ## References
 
