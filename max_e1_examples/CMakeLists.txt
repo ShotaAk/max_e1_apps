@@ -9,3 +9,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(read_example read_example.cpp)
 target_link_libraries(read_example max_e1 dxl_x64_cpp)
+
+add_executable(actuators_example actuators_example.cpp)
+target_link_libraries(actuators_example max_e1 dxl_x64_cpp)

@@ -37,3 +37,12 @@ acc_x:0.116
 acc_y:0.065
 acc_z:1.017
 ```
+
+## Actuators example
+
+MAX-E1のアクチュエータを動かすサンプルです。
+
+```sh
+$ export LD_LIBRARY_PATH=/usr/local/lib
+$ ./build/actuators_example
+```
