@@ -21,13 +21,27 @@ $ make
 $ sudo make install
 ```
 
+### MAX-E1 Applicationsのビルド&インストール
+
+```sh
+$ git clone https://github.com/ShotaAk/max_e1_apps
+$ cd max_e1_apps
+$ ./build_install.bash
+```
+
+### MAX-E1 ライブラリのアンインストール
+
+```sh
+$ cd max_e1_apps
+$ ./uninstall.bash
+```
+
+## サンプルの実行
+
+max_e1_examplesの[README](./max_e1_examples/README.md)を参照。
+
 ## References
 
-- CMakeのチュートリアル
-  - https://cmake.org/cmake/help/latest/guide/tutorial/index.html
-  - ソース: https://github.com/Kitware/CMake/tree/master/Help/guide/tutorial
-  - 全然わからん
-
-- CMakeのチュートリアル (Qiita)
-  - https://qiita.com/shohirose/items/45fb49c6b429e8b204ac
-  - こっちのほうがわかりやすい！！！
+- [ENGINEER Kit1 - ROBOTIS e-Manual](https://emanual.robotis.com/docs/en/edu/engineer/kit1/)
+- [CM-550 - ROBOTIS e-Manual](https://emanual.robotis.com/docs/en/parts/controller/cm-550/)
+- [DYNAMIXEL SDK - ROBOTIS e-Manual](https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/overview/)

@@ -5,11 +5,11 @@
 ```sh
 $ ls
 CMakeLists.txt  README.md max_e1_lib.cpp
-# ビルドツリー作成
+# Create a build tree
 $ cmake -B build
-# ビルド
+# Build
 $ cmake --build build
-# インストール
+# Install
 $ sudo cmake --install build
 ```
 
@@ -17,11 +17,4 @@ $ sudo cmake --install build
 
 ```sh
 $ xargs sudo rm -rf < build/install_manifest.txt
-```
-
-## Run
-
-```sh
-$ cd build
-$ ./max_e1_lib
 ```
