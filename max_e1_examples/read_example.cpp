@@ -8,18 +8,18 @@
 int main() {
     MaxE1 max_e1("/dev/ttyACM0", 1000000);
     if(max_e1.connect()){
-        int i = 0;
         max_e1.init();
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        while(i < 10){
-            i++;
-
-            auto begin = std::chrono::high_resolution_clock::now();
+        auto begin = std::chrono::high_resolution_clock::now();
+        int elapsed_time = 0;
+        while(elapsed_time < 10){
+            auto update_begin = std::chrono::high_resolution_clock::now();
             max_e1.sensors->update();
-            auto end = std::chrono::high_resolution_clock::now();
-            auto elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-            std::cout << elapsed_time.count() << "マイクロ秒" << std::endl;
+            auto update_elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(
+                std::chrono::high_resolution_clock::now() - update_begin).count();
+            std::cout << "sensors->update() took " << std::to_string(update_elapsed_time);
+            std::cout << " microseconds." << std::endl;
 
             std::cout<<"sound_detecting_count:"<<max_e1.sensors->sound_detecting_count()<<std::endl;
             std::cout<<"voltage:"<<max_e1.sensors->voltage()<< std::endl;
@@ -34,54 +34,9 @@ int main() {
             std::cout<<"acc_y:"<<max_e1.sensors->acc_y() << std::endl;
             std::cout<<"acc_z:"<<max_e1.sensors->acc_z() << std::endl;
 
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            elapsed_time = std::chrono::duration_cast<std::chrono::seconds>(
+                std::chrono::high_resolution_clock::now() - begin).count();
         }
-
-        i = 0;
-        while(i < 1000){
-            max_e1.sensors->update();
-            std::cout<<"orientation_p:"<<max_e1.sensors->orientation_p() << std::endl;
-            if(max_e1.sensors->orientation_p() <= -1){
-                max_e1.motions->play(23);
-                max_e1.motions->play(27);
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            }else if(max_e1.sensors->orientation_p() >= 1){
-                max_e1.motions->play(18);
-                max_e1.motions->play(22);
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            }
-        }
-
-        // for(auto i=0; i <= 30; i++){
-        //     max_e1.actuators->buzzer_melody(i);
-        //     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-        // }
-
-        // max_e1.actuators->buzzer_scale(0, 3.0);
-        // max_e1.actuators->buzzer_scale(1, 2.0);
-        // max_e1.actuators->buzzer_scale(2, 1.0);
-
-        // max_e1.actuators->led(true, false, false);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        // max_e1.actuators->led(false, true, false);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        // max_e1.actuators->led(false, false, true);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        // max_e1.actuators->led(true, true, false);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        // max_e1.actuators->led(false, true, true);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        // max_e1.actuators->led(true, false, true);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        // max_e1.actuators->led(true, true, true);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        // max_e1.actuators->led(false, false, false);
-
-        // max_e1.motions->play(18);
-        // max_e1.motions->play(22);
-
-        // max_e1.motions->play(23);
-        // max_e1.motions->play(27);
     }
     max_e1.disconnect();
 }
