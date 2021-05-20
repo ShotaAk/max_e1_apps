@@ -59,3 +59,30 @@ Play melody: 2
 Play melody: 3
 ...
 ```
+
+## Motions example
+
+MAX-E1に書き込んだMotionを再生するサンプルです。
+
+下記のMotion Indexを使用します
+
+| Index | Motion |
+| :---: | :---:  |
+|  4 | 直立して、上半身を前後に揺らす |
+| 18 | 左足を前に出す |
+| 20 | 右足、左足を順番に出して正面に歩く |
+| 22 | 右足を前に出して止まる |
+| 23 | 左足を後に出す |
+| 25 | 右足、左足を順番に出して真後に歩く |
+| 27 | 右足を後に出して止まる |
+
+```sh
+$ export LD_LIBRARY_PATH=/usr/local/lib
+$ ./build/motions_example
+...
+Move forward
+Move backward
+Stop a play immediately
+Stop a play at keyframe
+Stop a play at unit
+```
