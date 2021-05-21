@@ -1,7 +1,10 @@
 # MAX-E1 CPP Applications
 
-![MAX-E1](./resources/MAX-E1.JPG)
+![Architecture](./resources/MAX-E1LibArchitecture.png)
 
+[ROBOTIS ENGINEER KIT 1](https://www.rt-shop.jp/index.php?main_page=product_info&products_id=3892)
+の2足歩行ロボット**MAX-E1**用の
+C++ライブラリとアプリケーション集です。
 ## Requirements
 
 - Ubuntu 20.04
