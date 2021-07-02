@@ -7,6 +7,9 @@ project(max_e1_examples VERSION 1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+include_directories(../max_e1_lib/include)
+link_directories(../max_e1_lib/build)
+
 add_executable(sensors_example src/sensors_example.cpp)
 target_link_libraries(sensors_example max_e1 dxl_x64_cpp)
 
