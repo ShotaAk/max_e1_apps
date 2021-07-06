@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/bash -e
 
 cd $(dirname $0)
 DIR_MAX_E1_LIB=$(pwd)/max_e1_lib
